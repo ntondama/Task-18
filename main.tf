@@ -1,0 +1,21 @@
+resource "aws_instance" "dev_server" {
+  ami           = data.aws_ssm_parameter.ami_id.value
+  instance_type = var.instance_type
+  key_name      = "sydneykey" # Replace with your actual key pair name
+  count         = 3
+
+  tags = {
+    Name = "dev-server-${count.index}"
+  }
+}
+
+resource "aws_instance" "prod_server" {
+  ami           = data.aws_ssm_parameter.ami_id.value
+  instance_type = var.instance_type
+  key_name      = "sydneykey" # Replace with your actual key pair name
+  count         = 3
+
+  tags = {
+    Name = "prod-server-${count.index}"
+  }
+}
